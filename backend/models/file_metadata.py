@@ -10,16 +10,17 @@ class PyObjectId(ObjectId):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v):
+    def validate(cls, v, info=None):  
         if not ObjectId.is_valid(v):
             raise ValueError("Invalid objectid")
         return ObjectId(v)
 
     @classmethod
-    def __modify_schema__(cls, field_schema):
-        field_schema.update(type="string")
+    def __get_pydantic_json_schema__(cls, schema, handler):
+        return {"type": "string"}
 
 class FileStatus(str, Enum):
+    TEXT_EXTRACTED = ""
     UPLOADED = "uploaded"
     PROCESSING = "processing"
     PROCESSED = "processed"
@@ -65,13 +66,14 @@ class FileMetadata(BaseModel):
     
     # Expiry management
     expires_at: Optional[datetime] = None
+    expiry_warning: Optional[str] = None
     
     # Error handling
     error_message: Optional[str] = None
     processing_attempts: int = 0
     
     class Config:
-        allow_population_by_field_name = True
+        validate_by_name = True
         arbitrary_types_allowed = True
         json_encoders = {ObjectId: str}
 
@@ -90,6 +92,7 @@ class FileListResponse(BaseModel):
     total: int
     page: int
     page_size: int
+    total_pages: int
 
 class FileDetailResponse(BaseModel):
     file: FileMetadata
@@ -110,9 +113,27 @@ class AlertItem(BaseModel):
     days_until_expiry: int
 
 class AlertsResponse(BaseModel):
-    alerts: List[AlertItem]
-    total: int
+    """Response model for warranty alerts"""
+    user_id: str
+    total_alerts: int
+    expired_count: int
+    critical_count: int
+    warning_count: int
+    notice_count: int
+    most_urgent_alert: Optional[AlertItem] = None
+    alerts_by_severity: Dict[str, List[AlertItem]]
+    last_checked: datetime
 
 class CleanupResponse(BaseModel):
+    """Response model for cleanup operations"""
     deleted_count: int
+    storage_deleted: int
+    db_deleted: int
     processed_at: datetime
+    message: str
+    error: Optional[str] = None
+
+class CleanupScheduleRequest(BaseModel):
+    """Request model for scheduling cleanup tasks"""
+    force: bool = Field(False, description="Force cleanup even if not scheduled")
+    batch_size: Optional[int] = Field(None, description="Override default batch size")

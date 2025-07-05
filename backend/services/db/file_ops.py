@@ -3,6 +3,7 @@ from typing import Optional, List, Dict, Any
 from datetime import datetime, timezone
 from bson import ObjectId
 from pymongo import ASCENDING, DESCENDING
+
 from db.client import mongodb
 from models.file_metadata import FileMetadata, FileStatus, WarrantyData
 from config import settings
@@ -72,18 +73,18 @@ class FileOperations:
         """Update file processing status"""
         try:
             collection = await self._get_collection()
-            update_data = {
-                "status": status.value,
-                "processed_at": datetime.now(timezone.utc)
+            update_ops = {
+                "$set": {
+                    "status": status.value,
+                    "processed_at": datetime.now(timezone.utc)
+                }
             }
-            
             if error_message:
-                update_data["error_message"] = error_message
-                update_data["$inc"] = {"processing_attempts": 1}
-            
+                update_ops["$set"]["error_message"] = error_message
+                update_ops["$inc"] = {"processing_attempts": 1}
             result = await collection.update_one(
                 {"_id": ObjectId(file_id)},
-                {"$set": update_data}
+                update_ops
             )
             return result.modified_count > 0
         except Exception as e:
@@ -160,25 +161,6 @@ class FileOperations:
             logger.error(f"Failed to get expiring files for user {user_id}: {e}")
             return []
 
-    async def get_expired_files(self, batch_size: int = None) -> List[FileMetadata]:
-        """Get files that have passed their expiry date"""
-        try:
-            collection = await self._get_collection()
-            batch_size = batch_size or settings.CLEANUP_BATCH_SIZE
-            
-            cursor = collection.find({
-                "expires_at": {"$lt": datetime.now(timezone.utc)}
-            }).limit(batch_size)
-            
-            files = []
-            async for doc in cursor:
-                files.append(FileMetadata(**doc))
-            
-            return files
-        except Exception as e:
-            logger.error(f"Failed to get expired files: {e}")
-            return []
-
     async def bulk_delete_files(self, file_ids: List[str]) -> int:
         """Delete multiple files by ID"""
         try:
@@ -198,21 +180,6 @@ class FileOperations:
         except Exception as e:
             logger.error(f"Failed to get file count for user {user_id}: {e}")
             return 0
-
-    async def get_files_by_status(self, status: FileStatus, limit: int = 100) -> List[FileMetadata]:
-        """Get files by processing status"""
-        try:
-            collection = await self._get_collection()
-            cursor = collection.find({"status": status.value}).limit(limit)
-            
-            files = []
-            async for doc in cursor:
-                files.append(FileMetadata(**doc))
-            
-            return files
-        except Exception as e:
-            logger.error(f"Failed to get files by status {status}: {e}")
-            return []
 
 # Global file operations instance
 file_ops = FileOperations()

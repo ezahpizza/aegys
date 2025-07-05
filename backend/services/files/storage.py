@@ -1,9 +1,9 @@
 import logging
 import aiofiles
 from pathlib import Path
-from typing import Optional
 from datetime import datetime, timezone
 from fastapi import UploadFile, HTTPException
+
 from config import settings
 from models.file_metadata import FileType
 from utils.datetime import add_days_to_date
@@ -67,27 +67,6 @@ class FileStorage:
             logger.error(f"Failed to delete file {file_path}: {e}")
             return False
 
-    async def file_exists(self, file_path: str) -> bool:
-        """Check if file exists on disk"""
-        return Path(file_path).exists()
-
-    async def get_file_size(self, file_path: str) -> Optional[int]:
-        """Get file size in bytes"""
-        try:
-            path = Path(file_path)
-            return path.stat().st_size if path.exists() else None
-        except Exception as e:
-            logger.error(f"Failed to get file size for {file_path}: {e}")
-            return None
-
-    async def cleanup_expired_files(self, file_paths: list) -> int:
-        """Delete multiple files from disk"""
-        deleted_count = 0
-        for file_path in file_paths:
-            if await self.delete_file(file_path):
-                deleted_count += 1
-        return deleted_count
-
     def _validate_file(self, file: UploadFile):
         """Validate uploaded file"""
         if not file.filename:
@@ -115,7 +94,7 @@ class FileStorage:
     def get_user_directory(self, user_id: str) -> Path:
         """Get user's storage directory"""
         return self.base_path / user_id
-
+    
     async def get_user_storage_usage(self, user_id: str) -> dict:
         """Get storage usage statistics for a user"""
         user_dir = self.get_user_directory(user_id)

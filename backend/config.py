@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     MONGODB_URL: str = Field(..., env="MONGODB_URL")
     DATABASE_NAME: str = Field(..., env="DATABASE_NAME")
     
-    BASE_STORAGE_PATH: str = "/mnt/data/claimvault"
+    BASE_STORAGE_PATH: str = "/mnt/data/aegys"
     MAX_FILE_SIZE: int = 10 * 1024 * 1024  # 10MB
     ALLOWED_EXTENSIONS: list = [".pdf", ".png", ".jpg", ".jpeg", ".tiff", ".bmp"]
     

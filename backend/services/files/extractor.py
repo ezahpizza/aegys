@@ -3,6 +3,7 @@ import asyncio
 import fitz 
 import pytesseract
 from PIL import Image
+
 from config import settings
 from models.file_metadata import FileType
 
