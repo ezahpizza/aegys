@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
 import TestimonialCard from '@/components/parts/TestimonialCard';
-import TiltedCard from '@/components/ui/TiltedCard';
-
 
 interface LevelThreeProps {
   animationStage: number;
@@ -26,21 +24,24 @@ const LevelThree = ({ animationStage }: LevelThreeProps) => {
       >
         {/* Image Card */}
         <div className="order-2 md:order-1 h-96 md:h-[80%] pt-2 flex items-stretch rounded-xl">
-            <img src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=300&fit=crop' className="w-full h-full object-cover rounded-xl" />
+            <img src='/assets/imgcard.webp' className="w-full h-full object-cover rounded-xl" />
         </div>
 
         {/* Hero Section */}
-        <div className="order-1 md:order-2 md:col-span-3 h-96 md:h-full pt-2">
+        <div className="order-1 md:order-2 md:col-span-3 h-100 md:h-full pt-2">
           <div className="w-full h-full bg-magpink rounded-xl flex flex-col justify-center md:justify-start shadow-lg overflow-hidden">
             <div className="text-center md:text-left p-8">
               <h2 className="font-heading text-xl md:text-5xl text-white font-bold text-center md:text-left">
-                 hero section Lorem ipsum 
+                  <span className="text-xl md:text-5xl font-script italic font-light">Forget</span> Your Devices.
               </h2>
+              <h3 className="mt-6 font-body text-xl md:text-4xl text-white text-center md:text-left">
+                  We'll Remember <span className="text-md font-script italic font-light">(For You)</span>.
+              </h3>
             </div>
 
-            <div className="mt-2 md:mt-10 p-2">
-              <p className="font-body font-semibold text-midblu text-lg text-center md:text-right max-w-none md:max-w-[70%] md:ml-auto">
-                Description text displayed when user scrolls and bento div expands vertically downward Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatibus eligendi alias, recusandae nihil tenetur quod commodi ut sunt dolor, repellendus vitae labore, dicta voluptates! Repudiandae, labore distinctio. Veritatis consequatur 
+            <div className="mt-2 md:mt-10 m-10">
+              <p className="font-body font-semibold text-midblck text-lg text-center md:text-right max-w-none md:max-w-[70%] md:ml-auto">
+                Never lose sleep over misplaced warranties or forgotten service dates again. Aegys is your ultimate digital vault, simplifying device ownership by centralizing your bills and warranties, and sending smart alerts right when you need them. 
               </p>
             </div>
           </div>
@@ -60,7 +61,7 @@ const LevelThree = ({ animationStage }: LevelThreeProps) => {
       >
         <div className="hidden md:block md:col-span-3">
           <TestimonialCard 
-              boxBg = "bg-black" 
+              boxBg = "bg-midblu" 
               titleBg = "text-magpink" 
               paraBg = "text-white" 
               titleText = "lorem4fgsdabih"
@@ -69,8 +70,8 @@ const LevelThree = ({ animationStage }: LevelThreeProps) => {
         </div>
         <TestimonialCard
               boxBg = "bg-lavpink" 
-              titleBg = "text-midblu" 
-              paraBg = "text-black" 
+              titleBg = "text-midblck" 
+              paraBg = "text-midblu" 
               titleText = "lorem4fgsdabih"
               paraText = "WDUIYFBGVfasbgvadfinbiadfnbpunadf"
         />
@@ -89,14 +90,14 @@ const LevelThree = ({ animationStage }: LevelThreeProps) => {
       >
         <TestimonialCard
               boxBg = "bg-magpink" 
-              titleBg = "text-midblu" 
+              titleBg = "text-midblck" 
               paraBg = "text-white" 
               titleText = "lorem4fgsdabih"
               paraText = "WDUIYFBGVfasbgvadfinbiadfnbpunadf"
         />
         <div className="hidden md:block md:col-span-3">
           <TestimonialCard
-              boxBg = "bg-black" 
+              boxBg = "bg-midblu" 
               titleBg = "text-magpink" 
               paraBg = "text-white" 
               titleText = "lorem4fgsdabih"

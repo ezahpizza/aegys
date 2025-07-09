@@ -82,20 +82,23 @@ const SplitText: React.FC<SplitTextProps> = ({
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: repeat ? "play reverse play reverse" : "play none none reverse",
+        start: "top 95%",
+        end: "top 50%",
+        toggleActions: "play none none none",
         refreshPriority: -1,
+        onEnter: () => {
+          // Reset and play animation when entering viewport
+          gsap.set(targets, from);
+          tl.restart();
+        },
+        onEnterBack: () => {
+          // Reset and play animation when scrolling back into view
+          gsap.set(targets, from);
+          tl.restart();
+        },
       },
       smoothChildTiming: true,
       onComplete: () => {
-        if (!repeat) {
-          gsap.set(targets, {
-            ...to,
-            clearProps: "willChange",
-            immediateRender: true,
-          });
-        }
         onLetterAnimationComplete?.();
       },
     });
@@ -140,10 +143,14 @@ const SplitText: React.FC<SplitTextProps> = ({
       className={`split-parent ${className}`}
       style={{
         textAlign,
-        overflow: "visible",
-        display: "inline-block",
+        overflow: "hidden",
+        display: "block",
         whiteSpace: "normal",
         wordWrap: "break-word",
+        width: "100%",
+        minHeight: "1em",
+        paddingTop: "20px", // Space for y-axis animation
+        paddingBottom: "20px",
       }}
     >
       {text}

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import ImageCarousel from '@/components/parts/ImageCarousel';
 import SideCard from '@/components/parts/SideCard';
 
 interface LevelOneProps {
@@ -20,14 +19,15 @@ const LevelOne = ({ animationStage }: LevelOneProps) => {
         ease: "easeOut"
       }}
     >
-      <div className="md:col-span-3 h-full">
-        <ImageCarousel />
+      <div className="md:col-span-3 h-full md:h-64">
+          <img src='/assets/topimage.webp' className="w-full h-full object-cover" />
       </div>
       <div className="h-full flex items-stretch">
         <SideCard 
-          title="side section card 1" 
+          title="Track your device's entire history, from purchase to repair, effortlessly." 
           number="01"
           bg="bg-perspink"
+          textColor="text-midblu"
         />
       </div>
     </motion.div>

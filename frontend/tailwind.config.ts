@@ -1,5 +1,6 @@
 
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 export default {
 	darkMode: ["class"],
@@ -68,9 +69,10 @@ export default {
 				magpink: '#E63986',
 				raspink: '#D6185A',
 				midblu: '#190E4F',
+				midblck: '#051118',
 			},
 			fontFamily: {
-				logo: ['Libre Barcode 128 Text', 'cursive'],
+				script: ['Playwrite US Trad', 'cursive'],
 				heading: ['Lexend Zetta', 'sans-serif'],
 				body: ['Inconsolata', 'monospace'],
 			},
@@ -108,5 +110,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [animate],
 } satisfies Config;

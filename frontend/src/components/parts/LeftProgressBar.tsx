@@ -23,7 +23,7 @@ const LeftProgressBar = ({ isVisible }: { isVisible: boolean }) => {
           transition={{ duration: 0.6, delay: 0.5, ease: 'easeOut' }}
           style={{ opacity: homeOpacity }}
         >
-          <Home className="w-6 h-6 text-midblu" />
+          <Home className="w-6 h-6 text-midblck" />
         </motion.div>
 
         <motion.div
@@ -32,7 +32,7 @@ const LeftProgressBar = ({ isVisible }: { isVisible: boolean }) => {
           transition={{ duration: 0.6, delay: 0.7, ease: 'easeOut' }}
           style={{ opacity: documentOpacity }}
         >
-          <FileText className="w-6 h-6 text-midblu" />
+          <FileText className="w-6 h-6 text-midblck" />
         </motion.div>
 
         <motion.div
@@ -41,7 +41,7 @@ const LeftProgressBar = ({ isVisible }: { isVisible: boolean }) => {
           transition={{ duration: 0.6, delay: 0.9, ease: 'easeOut' }}
           style={{ opacity: smileOpacity }}
         >
-          <Smile className="w-6 h-6 text-midblu" />
+          <Smile className="w-6 h-6 text-midblck" />
         </motion.div>
 
       </div>

@@ -13,7 +13,7 @@ interface CTAButtonProps {
   className?: string;
 }
 
-const CTAButton = ({ onClick, children, className = "text-midblu font-semibold" }: CTAButtonProps) => (
+const CTAButton = ({ onClick, children, className = "text-midblck font-semibold" }: CTAButtonProps) => (
   <div className="w-full h-12 md:h-[27%] bg-magpink rounded-lg flex items-center justify-center md:justify-end md:pr-4 hover:bg-lavpink">
     <button onClick={onClick} className={className}>
       {children}
@@ -40,11 +40,11 @@ const ctaButtons = [
     key: 'auth',
     children: isSignedIn ? (
       <SignOutButton>
-        <button className="text-midblu font-semibold hover:bg-lavpink hover:text-midblu">Sign out</button>
+        <button className="text-midblck font-semibold hover:bg-lavpink hover:text-midblck">Sign out</button>
       </SignOutButton>
     ) : (
       <SignInButton mode="modal">
-        <button className="text-midblu font-semibold hover:bg-lavpink hover:text-midblu">Sign in</button>
+        <button className="text-midblck font-semibold hover:bg-lavpink hover:text-midblck">Sign in</button>
       </SignInButton>
     )
   }
@@ -123,7 +123,7 @@ const ctaButtons = [
           />
         </div>
         <motion.div 
-          className="w-full h-6 font-body text-sm md:text-md text-white text-center bg-midblu rounded-xl overflow-hidden"
+          className="w-full h-6 font-body text-sm md:text-md text-white text-center bg-midblck rounded-xl overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: animationStage >= 3 ? 1 : 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
@@ -146,9 +146,10 @@ const ctaButtons = [
         }}
       >
         <SideCard 
-          title="side section card 2" 
+          title="Keep every bill and warranty organized in one secure, digital hub." 
           number="02"
           bg="bg-raspink"
+          textColor="text-white"
         />
       </motion.div>
     </motion.div>

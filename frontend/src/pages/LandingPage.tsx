@@ -30,7 +30,7 @@ const LandingPage = () => {
         className="select-none min-h-screen py-2 md:py-4 px-2 md:px-3 relative"
         initial={{ backgroundColor: '#F8B7E1' }} // lavpink
         animate={{ 
-          backgroundColor: animationStage >= 2 ? '#190E4F' : '#F8B7E1' // midblu after stage 2
+          backgroundColor: animationStage >= 2 ? '#051118' : '#F8B7E1' // midblck after stage 2
         }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
       >
