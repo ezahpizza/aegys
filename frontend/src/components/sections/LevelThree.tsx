@@ -10,7 +10,7 @@ const LevelThree = ({ animationStage }: LevelThreeProps) => {
     <>
       {/* Image Card + Hero Section */}
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4 md:mb-8 h-auto md:h-[36rem] relative z-10"
+        className="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4 md:mb-8 h-auto md:h-[32rem] relative z-10"
         initial={{ opacity: 0, y: 0 }}
         animate={{ 
           opacity: animationStage >= 5 ? 1 : 0,
@@ -37,12 +37,14 @@ const LevelThree = ({ animationStage }: LevelThreeProps) => {
               <h3 className="mt-6 font-body text-xl md:text-4xl text-white text-center md:text-left">
                   We'll Remember <span className="text-md font-script italic font-light">(For You)</span>.
               </h3>
+
             </div>
 
             <div className="mt-2 md:mt-10 m-10">
               <p className="font-body font-semibold text-midblck text-lg text-center md:text-right max-w-none md:max-w-[70%] md:ml-auto">
                 Never lose sleep over misplaced warranties or forgotten service dates again. Aegys is your ultimate digital vault, simplifying device ownership by centralizing your bills and warranties, and sending smart alerts right when you need them. 
               </p>
+                  <img src='/assets/pentacle.webp' className="w-[15%] h-auto" />
             </div>
           </div>
         </div>
