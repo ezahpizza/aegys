@@ -1,3 +1,4 @@
+
 import { motion } from 'framer-motion';
 import TestimonialCard from '@/components/parts/TestimonialCard';
 
@@ -66,16 +67,16 @@ const LevelThree = ({ animationStage }: LevelThreeProps) => {
               boxBg = "bg-midblu" 
               titleBg = "text-magpink" 
               paraBg = "text-white" 
-              titleText = "lorem4fgsdabih"
-              paraText = "WDUIYFBGVfasbgvadfinbiadfnbpunadf"
+              titleText = "Sarah, Tech Enthusiast"
+              paraText = "Finally, a solution that keeps all my device info in one place! I used to lose warranty papers constantly, but Aegys has saved me hundreds of dollars by reminding me about coverage before it expires."
               />
         </div>
         <TestimonialCard
               boxBg = "bg-lavpink" 
               titleBg = "text-midblck" 
               paraBg = "text-midblu" 
-              titleText = "lorem4fgsdabih"
-              paraText = "WDUIYFBGVfasbgvadfinbiadfnbpunadf"
+              titleText = "Marcus, IT Manager"
+              paraText = "Managing 50+ company devices was a nightmare until Aegys. The smart alerts for maintenance schedules have reduced our downtime by 60%. It's a game-changer for any business."
         />
       </motion.div>
 
@@ -94,16 +95,16 @@ const LevelThree = ({ animationStage }: LevelThreeProps) => {
               boxBg = "bg-magpink" 
               titleBg = "text-midblck" 
               paraBg = "text-white" 
-              titleText = "lorem4fgsdabih"
-              paraText = "WDUIYFBGVfasbgvadfinbiadfnbpunadf"
+              titleText = "Jessica, Busy Mom"
+              paraText = "With three kids and countless gadgets, I was always forgetting when things were purchased. Aegys keeps everything organized and even reminds me when warranties are about to expire!"
         />
         <div className="hidden md:block md:col-span-3">
           <TestimonialCard
               boxBg = "bg-midblu" 
               titleBg = "text-magpink" 
               paraBg = "text-white" 
-              titleText = "lorem4fgsdabih"
-              paraText = "WDUIYFBGVfasbgvadfinbiadfnbpunadf"
+              titleText = "David, Small Business Owner"
+              paraText = "The digital receipt storage is incredible. No more shoebox of papers! When my laptop needed repair, I had all the documentation ready in seconds. Aegys has streamlined my entire workflow."
           />
         </div>
       </motion.div>
