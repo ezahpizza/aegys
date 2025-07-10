@@ -5,6 +5,8 @@ dist/
 wheels/
 *.egg-info
 
+backend/data
+
 .venv
 
 .env
@@ -27,6 +29,9 @@ dist-ssr
 
 # Editor directories and files
 .vscode/*
+
+backend/.vscode/*
+
 !.vscode/extensions.json
 .idea
 .DS_Store
