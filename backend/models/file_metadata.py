@@ -45,6 +45,10 @@ class WarrantyData(BaseModel):
     additional_info: Optional[Dict[str, Any]] = None
 
 class FileMetadata(BaseModel):
+    @property
+    def _id(self) -> str:
+        # Always return string version of id for frontend
+        return str(self.id) if self.id else ""
     id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
     user_id: str
     original_filename: str

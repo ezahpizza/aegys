@@ -1,4 +1,3 @@
-
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Home, FileText, Smile } from 'lucide-react';
 
@@ -8,16 +7,6 @@ const LeftProgressBar = ({ isVisible }: { isVisible: boolean }) => {
   const homeOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.3]);
   const documentOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.85], [0.3, 1, 0.3]);
   const smileOpacity = useTransform(scrollYProgress, [0.6, 0.85], [0.3, 1]);
-
-  const scrollToSection = (progress: number) => {
-    const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const targetPosition = documentHeight * progress;
-    
-    window.scrollTo({
-      top: targetPosition,
-      behavior: 'smooth'
-    });
-  };
 
   const smoothScrollToSection = (progress: number) => {
     const documentHeight = document.documentElement.scrollHeight - window.innerHeight;

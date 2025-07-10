@@ -15,6 +15,13 @@ class FileStorage:
         self.base_path = Path(settings.BASE_STORAGE_PATH)
         self.max_size = settings.MAX_FILE_SIZE
         self.allowed_extensions = settings.ALLOWED_EXTENSIONS
+        if not self.base_path.exists():
+            print(f"base path missing")
+            self.base_path.mkdir(parents=True, exist_ok=True)
+
+    def get_file_path(self, user_id: str, filename: str) -> Path:
+        """Get the absolute path to a user's file in storage"""
+        return self.base_path / user_id / filename
 
     async def save_file(self, file: UploadFile, user_id: str) -> dict:
         """Save uploaded file to disk and return file metadata"""
@@ -24,7 +31,8 @@ class FileStorage:
             
             # Create user directory
             user_dir = self.base_path / user_id
-            user_dir.mkdir(parents=True, exist_ok=True)
+            if not user_dir.exists():
+                user_dir.mkdir(parents=True, exist_ok=True)
             
             # Generate unique filename
             timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
@@ -53,6 +61,12 @@ class FileStorage:
         except Exception as e:
             logger.error(f"Failed to save file {file.filename}: {e}")
             raise HTTPException(status_code=500, detail=f"File save failed: {str(e)}")
+    async def fetch_file_for_serving(self, user_id: str, filename: str) -> Path:
+        """Get the file path for serving to client (e.g., for FastAPI StaticFiles or FileResponse)"""
+        file_path = self.get_file_path(user_id, filename)
+        if not file_path.exists() or not file_path.is_file():
+            raise HTTPException(status_code=404, detail="File not found")
+        return file_path
 
     async def delete_file(self, file_path: str) -> bool:
         """Delete file from disk"""

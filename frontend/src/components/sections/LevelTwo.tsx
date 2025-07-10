@@ -14,12 +14,21 @@ interface CTAButtonProps {
 }
 
 const CTAButton = ({ onClick, children, className = "text-midblck font-semibold" }: CTAButtonProps) => (
-  <div className="w-full h-12 md:h-[27%] bg-magpink rounded-lg flex items-center justify-center md:justify-end md:pr-4 hover:bg-lavpink">
-    <button onClick={onClick} className={className}>
-      {children}
-    </button>
+  <div
+    role="button"
+    tabIndex={0}
+    onClick={onClick}
+    onKeyDown={(e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        onClick?.();
+      }
+    }}
+    className={`w-full h-12 md:h-[27%] bg-magpink rounded-lg flex items-center justify-center md:justify-end md:pr-4 hover:bg-lavpink cursor-pointer transition-colors ${className}`}
+  >
+    {children}
   </div>
 );
+
 
 const LevelTwo = ({ animationStage }: LevelTwoProps) => {
   const { isSignedIn } = useUser();
@@ -28,7 +37,7 @@ const LevelTwo = ({ animationStage }: LevelTwoProps) => {
 const ctaButtons = [
   {
     key: 'get-started',
-    onClick: () => navigate('/AboutPage'),
+    onClick: () => navigate('/dashboard'),
     children: 'Get Started'
   },
   {

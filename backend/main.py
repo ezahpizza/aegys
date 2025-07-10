@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from config import settings
 from db.client import mongodb
-from routes import upload, files, llm, cleanup
+from routes import upload, files, llm, cleanup, user
 
 logging.basicConfig(
     level=getattr(logging, settings.LOG_LEVEL),
@@ -52,6 +52,8 @@ app.include_router(upload.router, prefix="/upload", tags=["upload"])
 app.include_router(files.router, prefix="/files", tags=["files"])
 app.include_router(llm.router, prefix="/llm", tags=["llm"])
 app.include_router(cleanup.router, prefix="/cleanup", tags=["cleanup"])
+app.include_router(user.router, prefix="/user", tags=["user"])
+
 
 @app.get("/")
 async def root():
