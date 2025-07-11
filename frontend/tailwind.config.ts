@@ -1,6 +1,8 @@
 
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
+import dotGrid from '@nauverse/tailwind-dot-grid-backgrounds';
+
 
 export default {
 	darkMode: ["class"],
@@ -110,5 +112,5 @@ export default {
 			}
 		}
 	},
-	plugins: [animate],
+	plugins: [animate, dotGrid],
 } satisfies Config;

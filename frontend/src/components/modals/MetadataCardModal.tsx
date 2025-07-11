@@ -1,5 +1,4 @@
-import { Dialog } from "@headlessui/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { FileMetadata } from "../../types/apiTypes";
 import ParseWarrantyButton from "../files/ParseWarrantyButton";
 
@@ -7,49 +6,37 @@ interface MetadataCardModalProps {
   open: boolean;
   onClose: () => void;
   file?: FileMetadata;
+  loading?: boolean;
 }
 
-export default function MetadataCardModal({ open, onClose, file }: MetadataCardModalProps) {
+export default function MetadataCardModal({ open, onClose, file, loading }: MetadataCardModalProps) {
   return (
-    <AnimatePresence>
-      {open && (
-        <Dialog as="div" className="fixed z-50 inset-0" open={open} onClose={onClose}>
-          <div className="fixed inset-0 bg-black/40" aria-hidden="true" />
-          <div className="fixed inset-0 flex items-center justify-center p-4">
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 relative"
-            >
-              <Dialog.Title className="font-heading text-lg mb-2">Warranty Metadata</Dialog.Title>
-              {file?.warranty_data ? (
-                <div className="space-y-2 text-midblck">
-                  {Object.entries(file.warranty_data).map(([key, value]) => (
-                    <div key={key} className="flex justify-between border-b py-1">
-                      <span className="font-semibold capitalize">{key.replace(/_/g, " ")}</span>
-                      <span>{String(value)}</span>
-                    </div>
-                  ))}
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="bg-midblu/60 border-none text-white rounded-xl shadow-xl p-6">
+        <div className="w-full relative">
+          <DialogHeader className="font-heading text-lg mb-2">Warranty Metadata</DialogHeader>
+          {loading && (
+            <div className="absolute inset-0 bg-white/60 flex items-center justify-center z-10">
+              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-magpink" />
+            </div>
+          )}
+          {!loading && file?.warranty_data ? (
+            <div className="space-y-2 text-midblck">
+              {Object.entries(file.warranty_data).map(([key, value]) => (
+                <div key={key} className="flex justify-between border-b py-1">
+                  <span className="font-semibold capitalize">{key.replace(/_/g, " ")}</span>
+                  <span>{String(value)}</span>
                 </div>
-              ) : (
-                <div className="text-center">No metadata available.</div>
-              )}
-              {file && file._id && file.user_id && (
-                <ParseWarrantyButton fileId={file._id} userId={file.user_id} />
-              )}
-              <button
-                className="absolute top-4 right-4 text-midblck hover:text-magpink text-2xl"
-                onClick={onClose}
-                aria-label="Close"
-              >
-                ×
-              </button>
-            </motion.div>
-          </div>
-        </Dialog>
-      )}
-    </AnimatePresence>
+              ))}
+            </div>
+          ) : (
+            <div className="font-body text-center">No metadata available.</div>
+          )}
+          {file && file._id && file.user_id && (
+            <ParseWarrantyButton fileId={file._id} userId={file.user_id} />
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

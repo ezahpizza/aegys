@@ -26,7 +26,7 @@ export default function ParseWarrantyButton({ fileId, userId }: { fileId: string
   return (
     <div className="my-2">
       <button
-        className="px-3 py-1 bg-lavpink text-white rounded hover:bg-magpink disabled:opacity-50"
+        className="font-body px-3 py-1 bg-lavpink text-midblck rounded hover:bg-magpink disabled:opacity-50"
         onClick={handleParse}
         disabled={loading}
       >

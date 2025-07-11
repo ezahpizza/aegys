@@ -97,15 +97,15 @@ const ctaButtons = [
           <motion.div 
             className="absolute inset-0 bg-white border-2 border-gray-200 rounded-xl"
             initial={{ 
-              backgroundColor: 'transparent',
-              borderColor: 'transparent',
+              backgroundColor: 'rgba(255, 255, 255, 0)', 
+              borderColor: 'rgba(229, 231, 235, 0)', 
               scale: 0,
               originX: 0.5,
               originY: 0.5
             }}
             animate={{ 
-              backgroundColor: animationStage >= 3 ? '#ffffff' : 'transparent',
-              borderColor: animationStage >= 3 ? '#e5e7eb' : 'transparent',
+              backgroundColor: animationStage >= 3 ? '#ffffff' : 'rgba(255, 255, 255, 0)',
+              borderColor: animationStage >= 3 ? '#e5e7eb' : 'rgba(229, 231, 235, 0)',
               scale: animationStage >= 3 ? 1 : 0
             }}
             transition={{ 
@@ -114,8 +114,8 @@ const ctaButtons = [
               delay: animationStage >= 3 ? 0.3 : 0
             }}
           />
+
           
-          {/* Logo stays in its position */}
           <motion.img 
             src='/assets/aegys_logo.svg' 
             alt='aegys logo' 

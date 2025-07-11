@@ -1,6 +1,9 @@
 import { useRef } from "react";
 import { useUploadStore } from "../../stores/uploadStore";
 import { useToast } from "../ui/use-toast";
+import PixelCard from '../ui/PixelCard';
+import { Upload } from 'lucide-react';
+
 
 interface FileUploadZoneProps {
   userId: string;
@@ -35,7 +38,7 @@ export default function FileUploadZone({ userId }: FileUploadZoneProps) {
 
   return (
     <div
-      className="border-2 border-dashed border-lavpink rounded-lg p-8 text-center cursor-pointer bg-midblck/40 hover:bg-midblu/40 transition-colors"
+      className="h-72 border-2 border-dashed border-lavpink rounded-lg p-8 text-center cursor-pointer bg-dot-8-s-2-raspink bg-midblck hover:bg-midblu transition-colors"
       onDrop={onDrop}
       onDragOver={e => e.preventDefault()}
       onClick={() => inputRef.current?.click()}
@@ -51,8 +54,16 @@ export default function FileUploadZone({ userId }: FileUploadZoneProps) {
         onChange={onChange}
         disabled={uploading || validating}
       />
-      <div className="font-heading text-lg text-lavpink mb-2">Drag & drop or click to upload</div>
-      <div className="text-perspink font-body text-sm">PDF or image files only</div>
+
+      <div className="h-full flex flex-col items-center justify-center space-y-4">
+          <Upload className="h-12 w-12 text-raspink" />
+          <PixelCard variant="pink" className='bg-midblu/80 hover:bg-midblck/80'>
+          <div className="absolute w-[75%]">
+              <div className="font-heading text-lg text-lavpink mb-2">Drag & drop or click to upload</div>
+              <div className="text-perspink font-body text-sm">PDF or image files only</div>
+          </div>
+          </PixelCard>
+      </div>
     </div>
   );
 }

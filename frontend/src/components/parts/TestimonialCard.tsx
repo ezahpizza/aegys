@@ -15,7 +15,7 @@ const TestimonialCard = ({
 }: TestimonialCardProps) => {
     return (
         <div className={`w-full h-64 md:h-80 ${boxBg} rounded-xl flex items-center justify-center`}>
-            <div className="text-center">
+            <div className="text-center p-4">
                 <h3 className={`font-heading text-lg font-semibold ${titleBg}`}>
                     {titleText}
                 </h3>

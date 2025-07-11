@@ -16,54 +16,44 @@ export default function FilesTab({ userId }: { userId: string }) {
     removeFile,
   } = useFilesStore();
   
-  // Fetch files on mount or when userId changes
   useEffect(() => {
-    if (userId) fetchFiles(userId);
+    if (userId) {
+      fetchFiles(userId);
+    }
   }, [userId]);
 
-  // Modal state for metadata only
   const [showMeta, setShowMeta] = useState(false);
+  const [metaLoading, setMetaLoading] = useState(false);
 
-  // Handler for metadata button
   const handleMeta = async (file: any) => {
+    setMetaLoading(true);
     await fetchFileDetails(file._id, userId);
     setShowMeta(true);
+    setMetaLoading(false);
   };
 
 
-  // State for delete confirmation
   const [deleteTarget, setDeleteTarget] = useState<any>(null);
   const [deleting, setDeleting] = useState(false);
 
-  // Handler for delete button (open dialog)
   const handleDelete = (file: any) => {
     setDeleteTarget(file);
   };
 
-  // Confirm delete action
   const confirmDelete = async () => {
     if (!deleteTarget) return;
     setDeleting(true);
     await removeFile(deleteTarget._id, userId);
     setDeleteTarget(null);
     setDeleting(false);
-    // Instead of full refetch, optimistically update files in store
-    // Optionally, you can call fetchFiles(userId) if needed
   };
 
-  // Cancel delete
   const cancelDelete = () => {
     setDeleteTarget(null);
   };
 
   return (
     <div className="w-full relative">
-      {/* Overlay for loading during delete or fetch */}
-      {(loading || deleting) && (
-        <div className="absolute inset-0 bg-white/60 flex items-center justify-center z-20">
-          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-magpink" />
-        </div>
-      )}
       <FileTable
         files={files}
         loading={loading}
@@ -72,21 +62,20 @@ export default function FilesTab({ userId }: { userId: string }) {
         onDeleteClick={handleDelete}
         userId={userId}
       />
-      <MetadataCardModal open={showMeta} onClose={() => setShowMeta(false)} file={selectedFile} />
+      <MetadataCardModal open={showMeta} onClose={() => setShowMeta(false)} file={selectedFile} loading={metaLoading} />
 
-      {/* Custom Delete Confirmation Dialog */}
       <Dialog open={!!deleteTarget} onOpenChange={cancelDelete}>
-        <DialogContent>
-          <DialogHeader>Delete File</DialogHeader>
-          <div>Are you sure you want to delete <b>{deleteTarget?.original_filename}</b>?</div>
+        <DialogContent className="bg-midblu/60 border-none text-white">
+          <DialogHeader className="font-heading">Delete File</DialogHeader>
+          <div className="font-body">Are you sure you want to delete <b>{deleteTarget?.original_filename}</b>?</div>
           <DialogFooter>
             <button
-              className="px-4 py-2 bg-gray-200 rounded mr-2"
+              className="font-body px-4 py-2 bg-magpink text-midblck hover:bg-raspink rounded mr-2"
               onClick={cancelDelete}
               disabled={deleting}
             >Cancel</button>
             <button
-              className="px-4 py-2 bg-magpink text-white rounded"
+              className="font-body px-4 py-2 text-midblck bg-white hover:bg-red-500 hover:text-white rounded"
               onClick={confirmDelete}
               disabled={deleting}
             >{deleting ? 'Deleting...' : 'Delete'}</button>

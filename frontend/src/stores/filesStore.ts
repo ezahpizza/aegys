@@ -64,14 +64,11 @@ export const useFilesStore = create<FilesState>((set, get) => ({
     }
   },
   fetchFileDetails: async (file_id, user_id) => {
-    set({ loading: true, error: undefined });
     try {
       const file = await getFileDetails(file_id, user_id);
       set({ selectedFile: file });
     } catch (e: any) {
       set({ error: e?.response?.data?.detail || e.message });
-    } finally {
-      set({ loading: false });
     }
   },
   removeFile: async (file_id, user_id) => {

@@ -32,13 +32,14 @@ export default function Dashboard() {
             <AnimatePresence mode="wait">
               {currentTab === "Upload" && (
                 <motion.div
-                  key="upload"
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -24 }}
-                  transition={{ duration: 0.25 }}
-                  className="absolute w-full"
-                >
+                    key="upload"
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -24 }}
+                    transition={{ duration: 0.25 }}
+                    className="w-full"
+                  >
+
                   <UploadTab userId={user?.id!} />
                 </motion.div>
               )}
