@@ -76,34 +76,39 @@
     "page": 1,
     "page_size": 20,
     "total_pages": 3
-  }
-  ```
-  - `FileMetadata` includes all file details, warranty data, expiry info, etc.
-
-#### `GET /files/{file_id}`
-- **Purpose:** Get detailed metadata for a specific file.
-- **Query Params:** `user_id`
-- **Response:** `FileMetadata`
-
-#### `DELETE /files/{file_id}`
-- **Purpose:** Delete a file and its database record.
-- **Query Params:** `user_id`
-- **Response:** JSON with deletion status
-
-#### `GET /files/user/{user_id}/stats`
-- **Purpose:** Get file statistics for a user (counts, storage usage, expiring warranties).
+#### `POST /upload/`
+Upload a warranty/bill file, extract text, and create a database record.
 - **Response:** JSON with stats
+#### `POST /upload/validate`
+Validate file type and size before upload.
 
+### 2. **Files**
 #### `GET /files/user/{user_id}/expiring`
+#### `GET /files/`
+Get paginated list of files for a user, with metadata and warranty info. Supports pagination and status filtering.
 - **Purpose:** List files with warranties expiring soon.
+#### `GET /files/{file_id}`
+Get details for a specific file by ID.
 - **Query Params:** `days_ahead` (default: 30)
+### 3. **LLM Parsing**
 - **Response:** JSON with expiring files
+#### `POST /llm/parse`
+Parse warranty information from uploaded file using Gemini LLM. Returns structured warranty data.
 
+### 4. **User**
 #### `POST /files/user/{user_id}/cleanup`
+#### `GET /user/{user_id}/stats`
+Get file statistics for a user: total file count, storage usage, files by status, expiring warranties count.
 - **Purpose:** Clean up expired files for a user (dry run or actual delete).
+### 5. **Cleanup & Alerts**
 - **Query Params:** `dry_run` (default: false)
+#### `POST /cleanup/schedule`
+Schedule cleanup of expired files (internal/cron/admin).
 - **Response:** JSON with cleanup summary
+#### `GET /cleanup/alerts`
+Get warranty expiry alerts for a user, categorized by severity.
 
+---
 ---
 
 ### 3. **LLM Parsing**
