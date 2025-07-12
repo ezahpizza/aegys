@@ -1,17 +1,12 @@
-
-
 # aegys Backend
 
 **aegys** is a backend API for a Warranty & Bill Organizer, designed to help users manage device warranties, bills, and service records. It enables uploading and parsing of warranty documents, tracking device coverage, setting alerts for expirations, and more.
-
 
 ## Project Overview
 
 **Domain:** Personal finance, device ownership  
 **Pain Point:** Users often misplace warranty details and miss coverage or repair windows.  
 **Solution:** aegys provides a centralized platform to upload, extract, and track warranty and bill information, set reminders, and manage device service history.
-
-
 
 ## Tech Stack
 
@@ -20,7 +15,7 @@
 - **File Storage:** Local, with optional S3/aiofiles support
 - **PDF/Text Extraction:** Custom extractors, GenAI 
 - **Frontend :** React, Tailwind CSS, PDF viewer
-- **Other:** Pydantic (data validation), Logging, CORS, Email reminders (planned)
+- **Other:** Pydantic (data validation), Email reminders (planned)
 
 ## API Endpoints
 
