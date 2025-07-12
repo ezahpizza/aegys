@@ -29,8 +29,9 @@ def parse_flexible_date(date_str: str) -> Optional[datetime]:
     return None
 
 def calculate_days_until(target_date: datetime) -> int:
-    #Calculate days until target date
     now = datetime.now(timezone.utc)
+    if target_date.tzinfo is None:
+        target_date = target_date.replace(tzinfo=timezone.utc)
     delta = target_date - now
     return delta.days
 
