@@ -1,64 +1,13 @@
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { SignInButton, SignOutButton, useUser } from '@clerk/clerk-react';
+import { CTAButton, useCTAButtons } from '@/components/parts/CTAButton';
 import SideCard from '@/components/parts/SideCard';
 
 interface LevelTwoProps {
   animationStage: number;
 }
 
-interface CTAButtonProps {
-  onClick?: () => void;
-  children: React.ReactNode;
-  className?: string;
-}
-
-const CTAButton = ({ onClick, children, className = "text-midblck font-semibold" }: CTAButtonProps) => (
-  <div
-    role="button"
-    tabIndex={0}
-    onClick={onClick}
-    onKeyDown={(e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        onClick?.();
-      }
-    }}
-    className={`w-full h-12 md:h-[27%] bg-magpink rounded-lg flex items-center justify-center md:justify-end md:pr-4 hover:bg-lavpink cursor-pointer transition-colors ${className}`}
-  >
-    {children}
-  </div>
-);
-
-
 const LevelTwo = ({ animationStage }: LevelTwoProps) => {
-  const { isSignedIn } = useUser();
-  const navigate = useNavigate();
-
-const ctaButtons = [
-  {
-    key: 'get-started',
-    onClick: () => navigate('/dashboard'),
-    children: 'Get Started'
-  },
-  {
-    key: 'learn-more',
-    onClick: () => navigate('/AboutPage'),
-    children: 'Learn More'
-  },
-  {
-    key: 'auth',
-    children: isSignedIn ? (
-      <SignOutButton>
-        <button className="text-midblck font-semibold hover:bg-lavpink hover:text-midblck">Sign out</button>
-      </SignOutButton>
-    ) : (
-      <SignInButton mode="modal">
-        <button className="text-midblck font-semibold hover:bg-lavpink hover:text-midblck">Sign in</button>
-      </SignInButton>
-    )
-  }
-];
-
+  const ctaButtons = useCTAButtons();
 
   return (
     <motion.div 
@@ -86,14 +35,14 @@ const ctaButtons = [
         ))}
       </motion.div>
 
-      {/* Logo + Infinite Scroll Combined - z-index: 30 (highest) */}
+      {/* Logo + Infinite Scroll Combined */}
       <motion.div 
         className="order-1 md:order-2 md:col-span-2 flex flex-col gap-1 items-center justify-center relative z-30"
         initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
       >
         <div className="relative w-full h-32 md:h-full flex items-center justify-center px-4">
-          {/* Background container that grows behind the logo */}
+          {/* Background container behind logo */}
           <motion.div 
             className="absolute inset-0 bg-white border-2 border-gray-200 rounded-xl"
             initial={{ 
@@ -115,7 +64,6 @@ const ctaButtons = [
             }}
           />
 
-          
           <motion.img 
             src='/assets/aegys_logo.svg' 
             alt='aegys logo' 

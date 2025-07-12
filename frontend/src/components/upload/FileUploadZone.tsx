@@ -4,7 +4,6 @@ import { useToast } from "../ui/use-toast";
 import PixelCard from '../ui/PixelCard';
 import { Upload } from 'lucide-react';
 
-
 interface FileUploadZoneProps {
   userId: string;
 }

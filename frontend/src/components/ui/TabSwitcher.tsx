@@ -1,23 +1,20 @@
-// src/components/ui/TabSwitcher.tsx
 import clsx from "clsx";
 
 interface TabSwitcherProps {
-  tabs: string[]; // <-- expects mutable string[]
+  tabs: string[]; 
   currentTab: string;
   onTabChange: (tab: string) => void;
 }
 
 export default function TabSwitcher({ tabs, currentTab, onTabChange }: TabSwitcherProps) {
 
-
-
   return (
-    <nav className="flex gap-2 rounded-lg bg-midblck/80 p-1 w-fit mx-auto shadow">
+    <nav className="flex flex-wrap items-center justify-center gap-2 rounded-lg bg-midblck/80 p-1 w-full max-w-full sm:w-fit sm:mx-auto shadow overflow-x-auto">
       {tabs.map((tab) => (
         <button
           key={tab}
           className={clsx(
-            "px-5 py-2 rounded-md font-heading text-lg transition-colors focus:outline-none",
+            "px-4 py-2 rounded-md font-heading text-sm md:text-base transition-colors focus:outline-none whitespace-nowrap",
             currentTab === tab
               ? "bg-lavpink text-midblck shadow font-bold"
               : "text-lavpink hover:bg-midblu/60"

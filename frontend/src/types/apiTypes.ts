@@ -99,11 +99,14 @@ export interface AlertsResponse {
 export type AlertsBySeverity = Record<string, AlertItem[]>;
 
 export interface CleanupResponse {
-  deleted_count: number;
-  storage_deleted: number;
-  db_deleted: number;
-  processed_at: string;
-  message: string;
+  total_files: number;
+  expired_files: number;
+  files_to_delete: string[];
+  dry_run: boolean;
+  deleted_from_storage?: number;
+  deleted_from_db?: number;
+  cleanup_completed?: boolean;
+  message?: string;
   error?: string;
 }
 

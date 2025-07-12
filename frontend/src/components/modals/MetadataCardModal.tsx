@@ -12,7 +12,7 @@ interface MetadataCardModalProps {
 export default function MetadataCardModal({ open, onClose, file, loading }: MetadataCardModalProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="bg-midblu/60 border-none text-white rounded-xl shadow-xl p-6">
+      <DialogContent className="bg-midblu border-none text-white rounded-xl shadow-xl p-6">
         <div className="w-full relative">
           <DialogHeader className="font-heading text-lg mb-2">Warranty Metadata</DialogHeader>
           {loading && (
@@ -21,9 +21,9 @@ export default function MetadataCardModal({ open, onClose, file, loading }: Meta
             </div>
           )}
           {!loading && file?.warranty_data ? (
-            <div className="space-y-2 text-midblck">
+            <div className="space-y-2 text-white">
               {Object.entries(file.warranty_data).map(([key, value]) => (
-                <div key={key} className="flex justify-between border-b py-1">
+                <div key={key} className="flex justify-between py-1">
                   <span className="font-semibold capitalize">{key.replace(/_/g, " ")}</span>
                   <span>{String(value)}</span>
                 </div>

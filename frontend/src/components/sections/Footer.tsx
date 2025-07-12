@@ -9,7 +9,7 @@ const Footer = () => {
 
             {/* Links section */}
             <div className="flex flex-col md:flex-row justify-center items-center gap-3 md:gap-16">
-                <Link to="/about-creator" className="font-body font-semibold text-midblck text-lg hover:text-raspink transition-colors uppercase">
+                <Link to="/aboutDev" className="font-body font-semibold text-midblck text-lg hover:text-raspink transition-colors uppercase">
                     ABOUT THE CREATOR
                 </Link>
                 <Link to="/about" className="font-body font-semibold text-midblck text-lg hover:text-raspink transition-colors uppercase">

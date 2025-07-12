@@ -1,6 +1,5 @@
-// src/pages/Dashboard.tsx
 import { SignedIn, SignedOut, RedirectToSignIn, useUser } from "@clerk/clerk-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import TabSwitcher from "../components/ui/TabSwitcher";
@@ -8,11 +7,15 @@ import UploadTab from "@/components/tabs/UploadTab";
 import FilesTab from "@/components/tabs/FilesTab";
 import AlertsTab from "@/components/tabs/AlertsTab";
 
-
 const TABS = ["Upload", "Files", "Alerts"];
 type Tab = (typeof TABS)[number];
 
 export default function Dashboard() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const [currentTab, setCurrentTab] = useState<Tab>("Upload");
   const { user } = useUser();
 

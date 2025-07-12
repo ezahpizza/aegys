@@ -1,4 +1,3 @@
-
 interface SideCardProps {
     title: string;
     number: string;
